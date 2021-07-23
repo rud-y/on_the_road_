@@ -1,9 +1,33 @@
 .hidden {
  display: none;
 }
+.visible {
+ display: block;
+}
+.screen {
+ border: 2px solid green;
+}
+.game-wrapper {
+ background-color: burlywood;
+ width:fit-content;
+}
 
-.game {
- width: 300px;
- height: 200px;
- background-color: burlywood
+.car {
+ position: absolute;
+ top: 200px;
+ left: 220px;
+ margin: auto;
+ width: 60px;
+ height: 100px;
+ background-color: lightblue;
+ border: 4px solid black;
+}
+
+.game-area {
+ position: relative;
+ margin: auto;
+ width: 200px;
+ height: 100%;
+ overflow: hidden;
+ background-color: rgb(37, 24, 24);
 }
