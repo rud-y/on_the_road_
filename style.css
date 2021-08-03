@@ -35,14 +35,14 @@ body {
  position: relative;
  margin: 0 auto;
  width: 250px;
- height: 800px;
+ height: 600px;
  background-color: gray;
  border: white 1px solid;
 }
 
 .other-car {
  position: absolute;
- width: 65px;
+ width: 60px;
  height: 100px;
 }
 

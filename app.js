@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const startScreen = document.querySelector(".start-screen");
   const gameArea = document.querySelector(".game-area");
   // player obj for holding speed, start --------
-  let player = { speed: 4, turning: 5 };
+  let player = { speed: 4, turning: 3.5 };
 
   //keys object: 4 directions with key val
   let keys = {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function moveLines() {
     let lines = document.querySelectorAll(".line");
     lines.forEach((line) => {
-      console.log(line.y);
+      // console.log(line.y);
       if (line.y > 750) {
         line.y -= 750;
       }
@@ -31,19 +31,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Moving other cars downwards
-  function moveOtherCars() {
-    let element = document.querySelectorAll(".other-car");
-    element.forEach((car) => {
-      console.log(car.y);
-      if (car.y >= 1500) {
-        car.y -= 600;
-        car.style.left = Math.floor(Math.random() * 200) + "px";
-      }
+  function isCollide(a, b) {
+    let aRect = a.getBoundingClientRect();
+    let bRect = b.getBoundingClientRect();
+    return !(
+      aRect.bottom < bRect.top ||
+      aRect.top > bRect.bottom ||
+      aRect.right < bRect.left ||
+      aRect.left > bRect.right
+    );
+  }
 
+  // Moving other cars downwards
+  function moveOtherCar(car) {
+    let element = document.querySelectorAll(".other-car");
+    element.forEach((eachCar) => {
+      // console.log(eachCar.y);
+      if (isCollide(car, eachCar)) {
+        console.log("BEEN HIT");
+      }
+      if (eachCar.y >= 1500) {
+        eachCar.y -= 1500;
+        eachCar.style.left = Math.floor(Math.random() * 200) + "px";
+      }
       // !!!
-      car.y += player.speed;
-      car.style.top = car.y + "px";
+      eachCar.y += player.speed;
+      eachCar.style.top = eachCar.y + "px";
     });
   }
 
@@ -52,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // console.log("...playing...");
     let car = document.querySelector(".car");
     moveLines();
-    moveOtherCars();
+    moveOtherCar(car);
     let road = gameArea.getBoundingClientRect();
     // Setting pos of car element by pressing Up Down Left Right
     if (player.start) {
@@ -77,8 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function pressOn(e) {
     e.preventDefault();
     keys[e.key] = true;
-    // console.log("ON", e.key);
-    console.log(keys);
+    console.log("ON", e.key);
   }
 
   function pressOff(e) {
@@ -103,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.requestAnimationFrame(playGame);
     // Create a div for the CAR
     let car = document.createElement("div");
-    car.innerText = "My CAR";
+    car.innerText = "Jazz FJU";
     car.setAttribute("class", "car");
     gameArea.appendChild(car);
 
@@ -113,17 +125,18 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("car: ", car);
 
     // Other cars added
-    for (let x = 0; x < 13; x++) {
+    for (let x = 0; x < 4; x++) {
       let otherCar = document.createElement("div");
       otherCar.classList.add("other-car");
       //
       // otherCar.y = Math.floor(Math.random() * 500) * -1;
       otherCar.y = (x + 1) * 600 * -1;
       otherCar.style.top = otherCar.y + "px";
-      otherCar.style.left = Math.floor(Math.random() * 150) + "px";
+      otherCar.style.left = Math.floor(Math.random() * 250) + "px";
       otherCar.style.backgroundColor = "black";
       otherCar.style.border = "solid 1px white";
       gameArea.appendChild(otherCar);
+      console.log("otherCar: " + otherCar);
     }
   }
 });
