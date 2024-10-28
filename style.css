@@ -1,26 +1,33 @@
 body {
- background-color: rgb(73, 73, 129);
+ background-color: rgb(16, 104, 40);
 }
 .hidden {
  display: none;
 }
 
-.screen {
- border: 2px solid green;
-}
-.game-wrapper {
- 
+.start-screen, .finish-btn {
+ border: 1px solid whitesmoke;
+ border-radius: 5px;
+ color: whitesmoke;
+ cursor: pointer;
+ font-size: 46px;;
+ left: 4%;
+ padding: 2px 4px;
+ position: absolute;
+ top: 4%;
+ width:fit-content;
 }
 
 .car {
- position: absolute;
- top: 50px;
- left: 200px;
- margin: auto;
- width: 65px;
- height: 100px;
- background-color: darkolivegreen;
- border: 1px solid black;
+  height: 100px;
+  left: 200px;
+  margin: auto;
+  position: absolute;
+  top: 50px;
+  width: 48px;
+  background-image: url('images/car2.png');
+  background-size: contain;
+
 
 }
 .line {
@@ -28,16 +35,17 @@ body {
  width: 10px;
  height: 100px;
  margin-left: 122px ;
- background-color: rgb(245, 245, 23) ;
+ background-color: whitesmoke ;
 }
 
 .game-area {
  position: relative;
  margin: 0 auto;
  width: 250px;
- height: 600px;
+ height: 960px;
  background-color: gray;
- border: white 1px solid;
+ border-left: whitesmoke 10px solid;
+ border-right: whitesmoke 10px solid;
 }
 
 .other-car {

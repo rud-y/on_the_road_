@@ -2,8 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const score = document.querySelector(".score");
   const startScreen = document.querySelector(".start-screen");
   const gameArea = document.querySelector(".game-area");
-  // player obj for holding speed, start --------
-  let player = { speed: 4, turning: 3.5 };
+  const finishBtn = document.querySelector(".finish-btn");
+  finishBtn.classList.add("hidden");
+  finishBtn.onclick = () => {
+    window.location.reload();
+  }
+  // player obj for holding speed --------
+  let player = { speed: 5.5, turning: 4.5 };
 
   //keys object: 4 directions with key val
   let keys = {
@@ -62,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // PLAY
   function playGame() {
-    // console.log("...playing...");
     let car = document.querySelector(".car");
     moveLines();
     moveOtherCar(car);
@@ -102,8 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function start() {
     startScreen.classList.add("hidden");
     gameArea.classList.remove("hidden");
+    finishBtn.classList.remove("hidden");
     player.start = true;
-    // Lines added
+    // Lines added !
     for (let x = 0; x < 5; x++) {
       let lineDiv = document.createElement("div");
       lineDiv.classList.add("line");
@@ -112,10 +117,9 @@ document.addEventListener("DOMContentLoaded", function () {
       lineDiv.style.top = x * 200 + "px";
       gameArea.appendChild(lineDiv);
     }
-    window.requestAnimationFrame(playGame);
+    
     // Create a div for the CAR
     let car = document.createElement("div");
-    car.innerText = "Jazz FJU";
     car.setAttribute("class", "car");
     gameArea.appendChild(car);
 
@@ -125,12 +129,13 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("car: ", car);
 
     // Other cars added
-    for (let x = 0; x < 4; x++) {
+    for (let x = 0; x < 6; x++) {
       let otherCar = document.createElement("div");
       otherCar.classList.add("other-car");
       //
       // otherCar.y = Math.floor(Math.random() * 500) * -1;
-      otherCar.y = (x + 1) * 600 * -1;
+      otherCar.y = (x + 2) * 600;
+      console.log('Whats x: ', x);
       otherCar.style.top = otherCar.y + "px";
       otherCar.style.left = Math.floor(Math.random() * 250) + "px";
       otherCar.style.backgroundColor = "black";
@@ -138,5 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
       gameArea.appendChild(otherCar);
       console.log("otherCar: " + otherCar);
     }
+    window.requestAnimationFrame(playGame);
   }
 });
